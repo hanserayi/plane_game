@@ -1,1 +1,2 @@
-this is a plane fight game
+this project is a plane fight game
+
