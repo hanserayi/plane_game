@@ -15,32 +15,32 @@ bg_size = width, height = 480, 700
 screen = pygame.display.set_mode(bg_size)
 pygame.display.set_caption("飞机大战，是兄弟就来打我")
 # 背景图案显示
-background = pygame.image.load("H:/images/background.png").convert()
+background = pygame.image.load("./images/background.png").convert()
 
 # 背景音乐配置
-pygame.mixer.music.load("H:/sound/game_music.ogg")
+pygame.mixer.music.load("./sound/game_music.ogg")
 pygame.mixer.music.set_volume(0.2)
-bullet_sound = pygame.mixer.Sound("H:/sound/bullet.wav")
+bullet_sound = pygame.mixer.Sound("./sound/bullet.wav")
 bullet_sound.set_volume(0.2)
-bomb_sound = pygame.mixer.Sound("H:/sound/use_bomb.wav")
+bomb_sound = pygame.mixer.Sound("./sound/use_bomb.wav")
 bomb_sound.set_volume(0.2)
-supply_sound = pygame.mixer.Sound("H:/sound/supply.wav")
+supply_sound = pygame.mixer.Sound("./sound/supply.wav")
 supply_sound.set_volume(0.2)
-get_bomb_sound = pygame.mixer.Sound("H:/sound/get_bomb.wav")
+get_bomb_sound = pygame.mixer.Sound("./sound/get_bomb.wav")
 get_bomb_sound.set_volume(0.2)
-get_bullet_sound = pygame.mixer.Sound("H:/sound/get_bullet.wav")
+get_bullet_sound = pygame.mixer.Sound("./sound/get_bullet.wav")
 get_bullet_sound.set_volume(0.2)
-upgrade_sound = pygame.mixer.Sound("H:/sound/upgrade.wav")
+upgrade_sound = pygame.mixer.Sound("./sound/upgrade.wav")
 upgrade_sound.set_volume(0.2)
-enemy3_fly_sound = pygame.mixer.Sound("H:/sound/enemy3_flying.wav")
+enemy3_fly_sound = pygame.mixer.Sound("./sound/enemy3_flying.wav")
 enemy3_fly_sound.set_volume(0.2)
-enemy1_down_sound = pygame.mixer.Sound("H:/sound/enemy1_down.wav")
+enemy1_down_sound = pygame.mixer.Sound("./sound/enemy1_down.wav")
 enemy1_down_sound.set_volume(0.1)
-enemy2_down_sound = pygame.mixer.Sound("H:/sound/enemy2_down.wav")
+enemy2_down_sound = pygame.mixer.Sound("./sound/enemy2_down.wav")
 enemy2_down_sound.set_volume(0.2)
-enemy3_down_sound = pygame.mixer.Sound("H:/sound/enemy3_down.wav")
+enemy3_down_sound = pygame.mixer.Sound("./sound/enemy3_down.wav")
 enemy3_down_sound.set_volume(0.5)
-me_down_sound = pygame.mixer.Sound("H:/sound/me_down.wav")
+me_down_sound = pygame.mixer.Sound("./sound/me_down.wav")
 me_down_sound.set_volume(0.2)
 
 
@@ -100,7 +100,7 @@ def main():
         sup_bullets.append(bullet.Sup_bullet((me.rect.centerx+30, me.rect.centery)))
     # 累计得分
     score = 0
-    score_font = pygame.font.Font("H:/font/font.ttf", 36)
+    score_font = pygame.font.Font("./font/font.ttf", 36)
 
     # 生成敌方飞机
     enemies = pygame.sprite.Group()
@@ -122,10 +122,10 @@ def main():
 
     # 表示是否暂停游戏的按钮
     pause = False
-    paused_not_image = pygame.image.load("H:/images/pause_nor.png").convert_alpha()
-    paused_pressed_image = pygame.image.load("H:/images/pause_pressed.png").convert_alpha()
-    resume_not_image = pygame.image.load("H:/images/resume_nor.png").convert_alpha()
-    resume_pressed_image = pygame.image.load("H:/images/resume_pressed.png").convert_alpha()
+    paused_not_image = pygame.image.load("./images/pause_nor.png").convert_alpha()
+    paused_pressed_image = pygame.image.load("./images/pause_pressed.png").convert_alpha()
+    resume_not_image = pygame.image.load("./images/resume_nor.png").convert_alpha()
+    resume_pressed_image = pygame.image.load("./images/resume_pressed.png").convert_alpha()
     pause_rect = paused_not_image.get_rect()
     pause_rect.left, pause_rect.top = width - pause_rect.width - 10, 10
     paused_image = paused_not_image
@@ -148,16 +148,16 @@ def main():
     invincible_tim = USEREVENT + 2
 
     # 游戏结束画面
-    gameover_font = pygame.font.Font("H:/font/font.TTF", 48)
-    again_image = pygame.image.load("H:/images/again.png").convert_alpha()
+    gameover_font = pygame.font.Font("./font/font.TTF", 48)
+    again_image = pygame.image.load("./images/again.png").convert_alpha()
     again_rect = again_image.get_rect()
-    gameover_image = pygame.image.load("H:/images/gameover.png").convert_alpha()
+    gameover_image = pygame.image.load("./images/gameover.png").convert_alpha()
     gameover_rect = gameover_image.get_rect()
 
     # 炸弹补给
-    boom_image = pygame.image.load("H:/images/bomb.png").convert_alpha()
+    boom_image = pygame.image.load("./images/bomb.png").convert_alpha()
     boom_rect = boom_image.get_rect()
-    boom_font = pygame.font.Font("H:/font/font.ttf", 48)
+    boom_font = pygame.font.Font("./font/font.ttf", 48)
     boom_num = 3
 
     # 超级子弹定时器
@@ -165,7 +165,7 @@ def main():
     super_bullet_choice = False
 
     # 玩家生命数量
-    life_image = pygame.image.load("H:/images/life.png")
+    life_image = pygame.image.load("./images/life.png")
     life_rect = life_image.get_rect()
     life_num = 3
     # 每30秒发放一个补给包
@@ -223,7 +223,7 @@ def main():
                     bomb_supply.reset()
                 else:
                     bullet_supply.reset()
-
+ 
             elif event.type == super_bullet_tim:
                 super_bullet_choice = False
                 pygame.time.set_timer(super_bullet_tim, 0)
@@ -465,11 +465,11 @@ def main():
             if recording:
                 # 读取历史最高得分
                 recording = False
-                with open("H:/record.txt", "r") as f:
+                with open("./record.txt", "r") as f:
                     record_score = int(f.read())
                 if score > record_score:
                     record_score = score
-                    with open("H:/record.txt", "w") as f:
+                    with open("./record.txt", "w") as f:
                         f.write(str(score))
 
             # 绘制结束画面
